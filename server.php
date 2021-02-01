@@ -1,6 +1,6 @@
 <?php
 
-// AUTENTIFICACION HMAC
+/* ---------- HMAC AUTH ----------
 if (
     !array_key_exists( 'HTTP_X_HASH', $_SERVER ) ||
     !array_key_exists( 'HTTP_X_TIMESTAMP', $_SERVER) ||
@@ -33,7 +33,31 @@ if ( $newHash !== $hash ) {
     );
     die;
 }
-// FIN AUTENTIFICACION
+// FIN AUTENTIFICACION */
+
+// ----------AUTH WITH ACCESS TOKENS---------- //
+if ( !array_key_exists( 'HTTP_X_TOKEN', $_SERVER ) ) {
+    die;
+}
+$url = 'http://localhost:8001';
+$ch = curl_init( $url );
+curl_setopt(
+    $ch,
+    'CURLOP_HTTPHEADER',
+    [
+        "X-TOKEN: {$_SERVER['HTTP_X_TOKEN']}"
+    ]
+    );
+curl_setopt(
+    $ch,
+    'CURLOP_RETURNTRANSFER',
+    true
+);
+$ret = curl_exec( $ch );
+
+if ( $ret !== 'true' ) {
+    die;
+}
 // TIPO DE RECURSOS PERMITIDOS
 $allowedResourceTypes = [
     'books',
