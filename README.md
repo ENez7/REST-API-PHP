@@ -5,4 +5,4 @@
 
 - API made from the [Platzi](http://platzi.com "Platzi") [course](https://platzi.com/clases/api-rest/ "course")💚
 - Implemented GET, POST, PUT and DELETE functions
-- Made in localhost for proofs
+- Test made in local
